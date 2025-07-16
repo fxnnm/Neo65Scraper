@@ -1,0 +1,18 @@
+# Copy this to /etc/systemd/system/neo65-scraper.service
+# Replace <user> with your actual username and adjust paths as needed
+[Unit]
+Description=Neo65 Notion Watcher
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/<user>/Neo65Scraper
+ExecStart=/home/<user>/Neo65Scraper/venv/bin/python scraper.py
+Restart=always
+RestartSec=10
+EnvironmentFile=/home/<user>/Neo65Scraper/.env
+User=<user>
+Group=<user>
+
+[Install]
+WantedBy=multi-user.target

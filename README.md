@@ -13,7 +13,7 @@ The Neo65 Web Scraper is a Python-based tool designed to monitor the status of N
 - Configurable via environment variables.
 
 ## Requirements
-- Python 3.12.2
+- Recommended: Python 3.12.2
 - Dependencies listed in `requirements.txt`:
   ```
    beautifulsoup4==4.13.4
@@ -86,36 +86,6 @@ The Neo65 Web Scraper is a Python-based tool designed to monitor the status of N
 
 2. **Logs**:
    Check `logs/scraper.log` for runtime information and errors.
-
-## Ubuntu Service Setup
-To run the scraper as a service on Ubuntu, follow these steps:
-
-**⚠️ Security Note**: The service runs as a regular user, NOT as root. This is safer and recommended.
-
-1. **Copy the Service File**:
-   ```bash
-   sudo cp scraper.service /etc/systemd/system/neo65-scraper.service
-   ```
-
-2. **Edit the Service File** (replace `<user>` with your actual username):
-   ```bash
-   sudo nano /etc/systemd/system/neo65-scraper.service
-   ```
-   Update all instances of `<user>` with your actual username (e.g., `ubuntu`, `finn`, etc.)
-
-   **Tip**: Use `whoami` to check your username. For both `User=` and `Group=`, use the same name.
-
-3. **Reload systemd and Enable the Service**:
-   ```bash
-   sudo systemctl daemon-reload
-   sudo systemctl enable neo65-scraper
-   sudo systemctl start neo65-scraper
-   ```
-
-4. **Check Service Status**:
-   ```bash
-   sudo systemctl status neo65-scraper
-   ```
 
 ## How It Works
 - On startup, the tool sends an initialization email.

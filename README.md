@@ -89,32 +89,32 @@ The Neo65 Web Scraper is a Python-based tool designed to monitor the status of N
 
 ## Ubuntu Service Setup
 To run the scraper as a service on Ubuntu, follow these steps:
-1. **Create a Service File**:
-   Create a file named `neo65-scraper.service` in `/etc/systemd/system/` with the following content:
-   ```ini
-   # Copy this to /etc/systemd/system/neo65-scraper.service
-   # Replace <user> with your actual username and adjust paths as needed
-   [Unit]
-   Description=Neo65 Notion Watcher
-   After=network.target
 
-   [Service]
-   Type=simple
-   WorkingDirectory=/home/<user>/Neo65Scraper
-   ExecStart=/home/<user>/Neo65Scraper/venv/bin/python scraper.py
-   Restart=always
-   RestartSec=10
-   EnvironmentFile=/home/<user>/Neo65Scraper/.env
-   User=<user>
-   Group=<user>
+**⚠️ Security Note**: The service runs as a regular user, NOT as root. This is safer and recommended.
 
-   [Install]
-   WantedBy=multi-user.target
-   ```
-2. **Enable and Start the Service**:
+1. **Copy the Service File**:
    ```bash
+   sudo cp scraper.service /etc/systemd/system/neo65-scraper.service
+   ```
+
+2. **Edit the Service File** (replace `<user>` with your actual username):
+   ```bash
+   sudo nano /etc/systemd/system/neo65-scraper.service
+   ```
+   Update all instances of `<user>` with your actual username (e.g., `ubuntu`, `finn`, etc.)
+
+   **Tip**: Use `whoami` to check your username. For both `User=` and `Group=`, use the same name.
+
+3. **Reload systemd and Enable the Service**:
+   ```bash
+   sudo systemctl daemon-reload
    sudo systemctl enable neo65-scraper
    sudo systemctl start neo65-scraper
+   ```
+
+4. **Check Service Status**:
+   ```bash
+   sudo systemctl status neo65-scraper
    ```
 
 ## How It Works

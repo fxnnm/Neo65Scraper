@@ -9,17 +9,11 @@ sudo apt update
 # Install Python3 and pip if not already installed
 sudo apt install -y python3 python3-pip python3-venv
 
-# Install Firefox (headless version)
-sudo apt install -y firefox
-
-# Install geckodriver for Selenium
-echo "Installing geckodriver..."
-GECKODRIVER_VERSION="v0.34.0"
-wget https://github.com/mozilla/geckodriver/releases/download/$GECKODRIVER_VERSION/geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-tar -xzf geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
-sudo mv geckodriver /usr/local/bin/
-sudo chmod +x /usr/local/bin/geckodriver
-rm geckodriver-$GECKODRIVER_VERSION-linux64.tar.gz
+# Install Chrome
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+sudo apt update
+sudo apt install -y google-chrome-stable
 
 # Create virtual environment
 python3 -m venv venv
